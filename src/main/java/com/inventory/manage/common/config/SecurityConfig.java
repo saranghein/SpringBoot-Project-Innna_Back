@@ -48,7 +48,13 @@ public class SecurityConfig {
                         .requestMatchers("/", "/login", "/signup", "/validate-id",
                                 "/validate-nickname",
                                 "/reissue", "/exit",
-                                "/swagger-ui/**", "/index.html#/**"
+
+                                // swagger 관련
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+
                         )
                         .permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")

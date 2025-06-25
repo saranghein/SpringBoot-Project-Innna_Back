@@ -39,7 +39,7 @@ public class JwtUtil {
     }
 
     public boolean isValidAuthorization(String authorization){
-        if (authorization == null || !authorization.startsWith("bearer")) {
+        if (authorization == null || !authorization.startsWith("Bearer")) {
             return false;
         }
         return true;

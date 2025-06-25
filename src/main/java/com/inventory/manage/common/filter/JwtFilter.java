@@ -39,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         // bearer로 시작하지 않는 경우 예외 발생
-        if (!authorization.startsWith("bearer")) {
+        if (!authorization.startsWith("Bearer")) {
             // response body
             response.setCharacterEncoding("UTF-8");
             PrintWriter writer = response.getWriter();

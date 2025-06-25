@@ -7,6 +7,8 @@ import com.inventory.manage.user.dto.UserRequest.SignupDto;
 import com.inventory.manage.user.dto.UserRequest.ValidateIdDto;
 import com.inventory.manage.user.dto.UserResponse.*;
 import com.inventory.manage.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,12 +28,14 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "UserController", description = "UserController API 목록")
 public class UserController implements UserOperations {
     private final UserService userService;
     private final CookieGenerator cookieGenerator;
 
     @Override
     @PostMapping("/signup")
+    @Operation(summary = "회원가입", description = "회원가입을 하는 api")
     public ResponseEntity<?> signup(@RequestBody SignupDto signupDto) {
         try {
             userService.createUser(signupDto);
@@ -46,6 +50,7 @@ public class UserController implements UserOperations {
 
     @Override
     @PostMapping("/validate-id")
+    @Operation(summary = "id 중복체크", description = "중복되는지 검사해 알려주는 api")
     public ResponseEntity<?> validateId(@RequestBody ValidateIdDto validateIdDto) {
         try {
             if (userService.validateId(validateIdDto)) {
@@ -59,6 +64,7 @@ public class UserController implements UserOperations {
 
     @Override
     @PostMapping("/validate-nickname")
+    @Operation(summary = "닉네임 중복체크", description = "닉네임 중복되는지 검사해 알려주는 api")
     public ResponseEntity<?> validateNickname(@RequestBody ValidateNicknameDto validateNicknameDto) {
         try {
             if (userService.validateNickname(validateNicknameDto)) {
@@ -72,11 +78,12 @@ public class UserController implements UserOperations {
 
     @Override
     @PostMapping("/reissue")
+    @Operation(summary = "refresh 토큰 재발급", description = "refresh 토큰 재발급 api")
     public ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response) {
         try {
             TokenDto tokens = userService.reissue(request.getCookies());
 
-            response.setHeader("Authorization", "bearer " + tokens.getAccessToken());
+            response.setHeader("Authorization", "Bearer " + tokens.getAccessToken());
             response.addCookie(cookieGenerator.generateCookie("refresh", tokens.getRefreshToken(), 24 * 60 * 60));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -86,6 +93,7 @@ public class UserController implements UserOperations {
 
     @Override
     @DeleteMapping("/exit")
+    @Operation(summary = "회원 탈퇴", description = "회원 탈퇴해 제거하는 api")
     public ResponseEntity<?> exit(HttpServletRequest request, HttpServletResponse response) {
         try {
             userService.deleteUser();
@@ -98,6 +106,7 @@ public class UserController implements UserOperations {
 
     @Override
     @GetMapping("/mypage")
+    @Operation(summary = "마이페이지", description = "해당 회원의 정보를 보여주는 api")
     public ResponseEntity<?> getMypageInfo() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(userService.getMypageInfo());
@@ -108,6 +117,7 @@ public class UserController implements UserOperations {
 
     @Override
     @GetMapping("/mypage/info")
+    @Operation(summary = "마이페이지", description = "해당 회원의 정보를 보여주는 api")
     public ResponseEntity<?> getMyInfo() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(userService.getUserInfo());
@@ -118,6 +128,7 @@ public class UserController implements UserOperations {
 
     @Override
     @PutMapping("/mypage/info")
+    @Operation(summary = "마이페이지 수정", description = "해당 회원의 정보를 수정하는 api")
     public ResponseEntity<?> updateUserInfo(@RequestBody ChangeUserInfoDto updateUserInfoDto) {
         try {
             userService.updateUserInfo(updateUserInfoDto);
@@ -131,6 +142,7 @@ public class UserController implements UserOperations {
 
     @Override
     @PostMapping("/mypage/password")
+    @Operation(summary = "비밀번호 변경", description = "비밀번호 변경 api")
     public ResponseEntity<?> updatePassword(@RequestBody ChangePasswordDto updatePasswordDto) {
         try {
             userService.updatePassword(updatePasswordDto);
