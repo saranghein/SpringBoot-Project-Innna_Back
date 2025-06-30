@@ -33,6 +33,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException {
+
         setUsernameParameter("userId");
         String userId = obtainUsername(request);
         String password = obtainPassword(request);
@@ -53,7 +54,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String refreshToken = jwtGenerator.generateJwt("refresh", userId, role, 24 * 60 * 60 * 1000L); // 24시간
 
         // 헤더에 access token 추가
-        response.setHeader(HttpHeaders.AUTHORIZATION, "bearer " + accessToken);
+        response.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
 
         // 쿠키에 refresh token 추가
         response.addCookie(cookieGenerator.generateCookie("refresh", refreshToken, 60 * 60 * 24));

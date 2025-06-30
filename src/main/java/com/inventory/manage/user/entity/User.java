@@ -3,6 +3,7 @@ package com.inventory.manage.user.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.inventory.manage.user.dto.UserRequest.ChangeUserInfoDto;
 import com.inventory.manage.user.util.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,5 +55,12 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return this.userId;
+    }
+    public void updateUserInfo(ChangeUserInfoDto dto) {
+        this.nickname = dto.getNickname();
+    }
+
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
     }
 }
