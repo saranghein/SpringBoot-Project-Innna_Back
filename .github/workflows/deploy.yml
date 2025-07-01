@@ -53,11 +53,13 @@ jobs:
       # (6) 배포 아카이브 구성
       - name: Prepare deployment package
         run: |
+          mkdir -p deploy
           mkdir -p deploy/scripts
           cp build/libs/*.jar deploy/spring-webapp.jar
           cp scripts/*.sh deploy/scripts/
           cp appspec.yml deploy/
           chmod +x deploy/scripts/*.sh
+
           
       # (7) AWS 인증 설정
       - name: Configure AWS credentials
