@@ -45,9 +45,7 @@ public class SecurityConfig {
                 .logout((logout) -> logout.disable())
                 .httpBasic((httpBasic) -> httpBasic.disable())
                 .authorizeHttpRequests((authorizeRequest) -> authorizeRequest
-                        .requestMatchers("/", "/login", "/signup", "/validate-id",
-                                "/validate-nickname",
-                                "/reissue", "/exit",
+                        .requestMatchers("/", "/login", "/signup", "/validate-id",  "/validate-nickname", "/reissue", "/exit",
 
                                 // swagger 관련
                                 "/swagger-ui/**",
@@ -81,6 +79,8 @@ public class SecurityConfig {
 
                 // 허용 경로 설정
                 configuration.addAllowedOrigin("https://localhost:8080");
+                configuration.addAllowedOrigin("http://localhost:5173");
+
                 configuration.addAllowedHeader("*");
 
 
