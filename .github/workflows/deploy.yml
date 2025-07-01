@@ -65,7 +65,7 @@ jobs:
             --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
             --ignore-hidden-files \
             --s3-location s3://${{ env.S3_BUCKET_NAME }}/${{ github.sha }}.zip \
-            --source .
+            --source build/libs
 
       # (8) CodeDeploy로 EC2 배포 실행
       - name: Deploy to EC2 via CodeDeploy
