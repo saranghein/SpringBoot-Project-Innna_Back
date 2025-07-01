@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #!/usr/bin/env bash
 
 PROJECT_ROOT="/home/ubuntu/app"
@@ -9,9 +11,10 @@ DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
 
 TIME_NOW=$(date +%c)
 
+# jar만 업로드 하므로 필요없음
 # build 파일 복사
-echo "$TIME_NOW > $JAR_FILE 파일 복사" >> $DEPLOY_LOG
-cp $PROJECT_ROOT/build/libs/*.jar $JAR_FILE
+#echo "$TIME_NOW > $JAR_FILE 파일 복사" >> $DEPLOY_LOG
+#cp $PROJECT_ROOT/build/libs/*.jar $JAR_FILE
 
 # jar 파일 실행
 echo "$TIME_NOW > $JAR_FILE 파일 실행" >> $DEPLOY_LOG
