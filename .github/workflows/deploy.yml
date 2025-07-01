@@ -78,7 +78,7 @@ jobs:
             --s3-location s3://${{ env.S3_BUCKET_NAME }}/${{ github.sha }}.zip \
             --source deploy
 
-      # (8) CodeDeploy로 EC2 배포 실행
+      # (9) CodeDeploy로 EC2 배포 실행
       - name: Deploy to EC2 via CodeDeploy
         run: |
           aws deploy create-deployment \
