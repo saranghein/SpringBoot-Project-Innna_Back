@@ -78,9 +78,12 @@ public class SecurityConfig {
                 CorsConfiguration configuration = new CorsConfiguration();
 
                 // 허용 경로 설정
-                configuration.addAllowedOrigin("https://localhost:8080");
-                configuration.addAllowedOrigin("https://localhost:5173");
-
+//                configuration.addAllowedOrigin("https://localhost:8080");
+//                configuration.addAllowedOrigin("https://localhost:5173");
+                configuration.setAllowedOriginPatterns(List.of(
+                        "https://localhost:8080",
+                        "https://localhost:5173"
+                ));
                 configuration.addAllowedHeader("*");
 
 
