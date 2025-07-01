@@ -79,7 +79,7 @@ public class SecurityConfig {
 
                 // 허용 경로 설정
                 configuration.addAllowedOrigin("https://localhost:8080");
-                configuration.addAllowedOrigin("http://localhost:5173");
+                configuration.addAllowedOrigin("https://localhost:5173");
 
                 configuration.addAllowedHeader("*");
 
