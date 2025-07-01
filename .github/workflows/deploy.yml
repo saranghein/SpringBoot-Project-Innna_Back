@@ -56,7 +56,7 @@ jobs:
         run: |
           mkdir -p deploy
           mkdir -p deploy/scripts
-          cp build/libs/*.jar deploy/spring-webapp.jar
+          cp build/libs/spring-webapp.jar deploy/spring-webapp.jar
           cp scripts/*.sh deploy/scripts/
           cp appspec.yml deploy/
           chmod +x deploy/scripts/*.sh
