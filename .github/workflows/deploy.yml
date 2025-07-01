@@ -49,7 +49,8 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: clean build -x test
-          
+      - name: Check built jar
+        run: ls -lh build/libs
       # (6) 배포 아카이브 구성
       - name: Prepare deployment package
         run: |
