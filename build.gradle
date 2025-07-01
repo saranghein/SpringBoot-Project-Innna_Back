@@ -12,8 +12,11 @@ java {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
-jar {
-	enabled = false
+//jar {
+//	enabled = false
+//}
+bootJar {
+	archiveFileName = 'spring-webapp.jar'
 }
 configurations {
 	compileOnly {
